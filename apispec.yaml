@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  description: API for managing Notes.
+  version: 0.0.1
+  title: Notes API
+servers:
+- url: SERVER_URL
+security:
+  - ApiKeyAuth: [] 
+paths:
+  /notes:
+    get:
+      summary: List 'Notes' objects.
+      description: Retrieve a page of 'Note' objects from the server. 
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Notes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListOfNotes'
+    post:
+      summary: Creates a new 'Note' object.
+      description: Creates a new 'Note' object.
+      requestBody:
+        description: The Note object to create.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        "201":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+  /notes/{id}:
+    get:
+      summary: Retrieve Note object.
+      description: Retrieve a single Note object.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the desired Note object.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        "404":
+          description: Note was not found.
+    put:
+      summary: Update Note object.
+      description: Update a single Note object.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the desired Note object.
+        schema:
+          type: string
+      requestBody:
+        description: The Note object to update.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        "404":
+          description: Note was not found.
+    delete:
+      summary: Delete Note object.
+      description: Delete a single Note object.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the desired Note object.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+        "404":
+          description: Note was not found.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: x-apikey
+      in: header
+  schemas:
+    Note:
+      title: Note
+      type: object
+      properties:
+        id:
+          description: The id of the Note
+          type: string
+          example: hu32hu3
+        name:
+          description: The name of the Note
+          type: string
+          example: New note
+        text:
+          description: The text of the Note
+          type: string
+          example: This is a note
+        location:
+          description: The lopcation of the Note
+          type: string
+          example: Berlin, Germany
+        likes:
+          description: How many likes the Note has
+          type: number
+          example: 7
+    ListOfNotes:
+      title: List of Note objects
+      type: array
+      items:
+        $ref: '#/components/schemas/Note'

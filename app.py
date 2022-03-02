@@ -77,7 +77,7 @@ class notes:
 class openapispec:
 
   #Returns the OpenAPI spec, filled in with the current server
-  def GET(self, name):
+  def GET(self):
     f = open("apispec.yaml", "r")
     spec = f.read()
     spec = spec.replace("SERVER_URL", web.ctx.home.replace("http://", "https://"))

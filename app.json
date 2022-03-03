@@ -16,7 +16,7 @@
                 "gcloud services enable appengine.googleapis.com",
                 "gcloud services enable firebase.googleapis.com",
                 "APPENGINESTATUS=$(gcloud app describe 2>&1 || true)",
-                "if [[ $APPENGINESTATUS == *'ERROR'* ]]; then gcloud app create --region=europe-west && gcloud firestore databases create --region=europe-west; fi",
+                "if [[ $(gcloud app describe 2>&1 || true) == *'ERROR'* ]]; then gcloud app create --region=europe-west && gcloud firestore databases create --region=europe-west; fi",
                 "echo hello",
                 "echo $API_KEY"
             ]

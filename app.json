@@ -16,7 +16,7 @@
                 "gcloud services enable appengine.googleapis.com",
                 "gcloud services enable firebase.googleapis.com",
                 "if [[ $(gcloud app describe 2>&1 || true) == *'ERROR'* ]]; then echo 'No app engine or firestore instances found, creating...' && gcloud app create --region=europe-west && gcloud firestore databases create --region=europe-west; fi",
-                "echo 'No loading some test data..' && ./appsheet-api-template/loaddata.sh"
+                "echo 'Now loading some test data..' && pwd && ./loaddata.sh"
             ]
         }
     }

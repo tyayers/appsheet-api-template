@@ -38,10 +38,12 @@ class notes:
     if len(id) == 0:
       forms_ref = self.db.collection('notes')
       forms = forms_ref.stream()
-      new_result = []
+      new_result = {
+        "notes": []
+      }
 
       for form in forms:
-        new_result.append(form.to_dict())
+        new_result["notes"].append(form.to_dict())
     else:
       doc_ref = self.db.collection('notes').document(id[1:])
       doc = doc_ref.get()

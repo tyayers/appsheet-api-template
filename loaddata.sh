@@ -1,25 +1,24 @@
-TOKEN=$(gcloud auth print-access-token)
-echo $TOKEN
+export TOKEN=$(gcloud auth print-access-token)
 
-curl --location --request POST 'https://firestore.googleapis.com/v1/projects/bruno-1407a/databases/(default)/documents/notes?documentId=b78dfdb' \
---header 'Authorization: Bearer $TOKEN' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "fields": {
-        "id": {
-            "stringValue": "b78dfdb"
+curl --location --request POST "https://firestore.googleapis.com/v1/projects/bruno-1407a/databases/(default)/documents/notes?documentId=b78dfdb" \
+--header "Authorization: Bearer $TOKEN" \
+--header "Content-Type: application/json" \
+--data-raw "{
+    'fields': {
+        'id': {
+            'stringValue': 'b78dfdb'
         },
-        "name": {
-            "stringValue": "Test note"
+        'name': {
+            'stringValue': 'Test note'
         },
-        "text": {
-            "stringValue": "This is a test note"
+        'text': {
+            'stringValue': 'This is a test note'
         },
-        "location": {
-            "stringValue": "Berlin, Germany"
+        'location': {
+            'stringValue': 'Berlin, Germany'
         },
-        "likes": {
-            "integerValue": 7
+        'likes': {
+            'integerValue': 7
         }
     }
-}'
+}"

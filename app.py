@@ -23,7 +23,7 @@ app = web.application(urls, globals())
 if not firebase_admin._apps:
   cred = credentials.ApplicationDefault()
   firebase_admin.initialize_app(cred, {
-    'projectId': "bruno-1407a",
+    'projectId': cred.project_id,
   })
 
 class notes:
@@ -67,6 +67,21 @@ class notes:
     web.header('Content-Type', 'application/json')
     return json.dumps(data)
 
+  # Puts a note to be updated
+  def PUT(self, name):
+
+    data = json.loads(web.data())
+
+    logging.info(json.dumps(data))
+
+    self.db.collection('notes').document(data["id"]).set(data)
+
+    pprint.pprint(data)
+
+    web.header('Content-Type', 'application/json')
+    return json.dumps(data)
+
+  # Delets a note
   def DELETE(self, id):
     if id:
       self.db.collection(u'notes').document(id[1:]).delete()

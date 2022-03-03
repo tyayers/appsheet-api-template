@@ -1,6 +1,6 @@
 export TOKEN=$(gcloud auth print-access-token)
 
-curl --location --request POST "https://firestore.googleapis.com/v1/projects/bruno-1407a/databases/(default)/documents/notes?documentId=b78dfdb" \
+curl --location --request POST "https://firestore.googleapis.com/v1/projects/$GOOGLE_CLOUD_PROJECT/databases/(default)/documents/notes?documentId=b78dfdb" \
 --header "Authorization: Bearer $TOKEN" \
 --header "Content-Type: application/json" \
 --data-raw "{

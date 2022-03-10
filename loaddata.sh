@@ -1,5 +1,5 @@
 export TOKEN=$(gcloud auth print-access-token)
-export GOOGLE_CLOUD_PROJECT=$(gcloud config get project)
+#export GOOGLE_CLOUD_PROJECT=$(gcloud config get project)
 
 export COUNTER=0
 

@@ -3,7 +3,7 @@ export TOKEN=$(gcloud auth print-access-token)
 
 export COUNTER=0
 
-while [ $COUNTER -le 5 ]
+while [ $COUNTER -le 10 ]
 do
     RESULT=$(curl --location --request POST "https://firestore.googleapis.com/v1/projects/$GOOGLE_CLOUD_PROJECT/databases/(default)/documents/notes?documentId=b78dfdb" \
     --header "Authorization: Bearer $TOKEN" \
@@ -33,9 +33,10 @@ do
     if [[ "$RESULT" == *error* ]]
     then
         COUNTER=$(( $COUNTER + 1 ))
+        echo "Error detected, waiting 10s and then retry $COUNTER of 10 tries..."
+        sleep 10s
     else
-        COUNTER=6
+        COUNTER=11
     fi
 
-    sleep 7s
 done
